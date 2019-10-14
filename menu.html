@@ -14,7 +14,7 @@
       <div id="u9" class="ax_default image">
         <img id="u9_img" class="img " src="./image/back2.png"/>
       </div>
-
+      <div id="id"><p class="tip">用户id:</p><p id="idNumber"></p></div>
       <!-- Unnamed (Menu) -->
       <div id="u10" class="ax_default">
         <!-- Unnamed (Table) -->
@@ -56,8 +56,9 @@
           </div>
         </div>
       </div>
-  </body>
+
   <script>
+    
     function SignIn(IdName){
       if(IdName == "u12")
       {
@@ -80,20 +81,47 @@
       {
         var data = null;
         var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
+        //xhr.withCredentials = true;
 
         xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
-        window.location.href='enter.html';
+        console.log(this.responseText);
+        var JsonObj = JSON.parse(this.responseText);
+        if(JsonObj.status==0) window.location.href='enter.html';  
         }
         });
 
-        xhr.open("POST", "http://shisanshui.rtxux.xyz/auth/logout");
-        xhr.setRequestHeader("X-Auth-Token", "{$$.env.X-Auth-Token}");
+        xhr.open("POST", "https://api.shisanshui.rtxux.xyz/auth/logout");
+        var token = document.cookie.split(";")[0];
+        xhr.setRequestHeader("x-auth-token",token);
 
         xhr.send(data);
       
       } 
     }
+    var id=document.getElementById("idNumber");
+
+    window.onload=function(){
+        var data = null;
+
+        var xhr = new XMLHttpRequest();
+        //xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+        console.log(this.responseText);
+        var JsonObject = JSON.parse(this.responseText);
+        if(JsonObject.status==0) id.innerHTML=JsonObject.data.user_id;
+        if(JsonObject.status==1004) alert("Token过期");
+        }
+        });
+
+        xhr.open("GET", "https://api.shisanshui.rtxux.xyz/auth/validate");
+        var token = document.cookie.split(";")[0];
+        xhr.setRequestHeader("x-auth-token",token);
+        xhr.send(data);
+    }
+    
   </script>
+  </body>
 </html>
