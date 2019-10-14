@@ -87,8 +87,9 @@
   
         </div>
     </div>
-  </body>
+
   <script>
+    
     function SignIn(IdName) { 
       if(IdName == "u48")
       {
@@ -108,32 +109,41 @@
       }
     }
 
-    var PlayerID=document.getElementById("getId_playerID").innerHTML;
-    var LIMIT=document.getElementById("getId_limit").innerHTML;
-    var PAGE=document.getElementById("getId_page").innerHTML;
+    var PlayerID=document.getElementById("getId_playerID");
+    var LIMIT=document.getElementById("getId_limit");
+    var PAGE=document.getElementById("getId_page");
 
-    document.getElementById("getId_bt").onclick=function(ID){
-      //删掉存在的数据
-      var tb = document.getElementById('table');
-      var rowNum=tb.rows.length;
-      for (var j=0;j<rowNum;j++)
-      {
-         tb.deleteRow(j);
-      }
-
-      var data = JSON.stringify({
-      "player_id": PlayerID,
-      "limit": LIMIT,
-      "page": PAGE,
-      });
+    document.getElementById("getId_bt").onclick=function(){
+      var data =null;
       var xhr = new XMLHttpRequest();
-      xhr.withCredentials = true;
-        
+      //xhr.withCredentials = true;
+
       xhr.addEventListener("readystatechange", function () {
       if (this.readyState === this.DONE) {
       console.log(this.responseText);
-      var JsonObj = JSON.parse(this.responseText);
-      if(JsonObj.status==3002) alert("玩家不存在");
+      var JsonObject = JSON.parse(this.responseText);
+      add(JsonObject);
+      }
+      }
+      );
+
+      xhr.open("GET", "https://api.shisanshui.rtxux.xyz/history"+"?"+"&page="+PAGE.value+"&limit="+LIMIT.value+"&player_id="+PlayerID.value);
+      var token = document.cookie.split(";")[0];
+      xhr.setRequestHeader("x-auth-token",token);
+
+      xhr.send(data);
+    }
+
+    function add(JsonObj){
+      //删掉存在的数据
+      var tb = document.getElementById('table');
+      var rowNum=tb.rows.length;
+      for (var j=rowNum-1;j>=0;j--) //下标会变化，要从后往前删
+      {
+         tb.deleteRow(j);
+      }
+      if(JsonObj.status==1004) alert("Token过期");
+      if(JsonObj.status==3001) alert("玩家不存在");
       if(JsonObj.status==0){
 
       var tab=document.getElementById("table");
@@ -159,13 +169,10 @@
         tab.appendChild(note);
       }
       }
-      }
-      }
-      );
 
-      xhr.open("GET", "http://shisanshui.rtxux.xyz/game/history");
-
-      xhr.send(data);
     }
+    
   </script>
+
+  </body>
 </html>

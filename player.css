@@ -107,9 +107,9 @@ body {
   #u55 {
     border-width:0px;
     position:absolute;
-    left:167.5px;
+    left:145.5px;
     top:225px;
-    width:625px;
+    width:675px;
     height:200px;
   }
 
@@ -267,7 +267,7 @@ body {
   }
 
   .fixed_header{
-    width: 625px;
+    width: 675px;
     table-layout: fixed;
     border-collapse: collapse;
   }
@@ -299,7 +299,7 @@ body {
   }
   .card{
     text-align: center;
-    width:305px;
+    width:355px;
   }
   .score{
     text-align: center;
