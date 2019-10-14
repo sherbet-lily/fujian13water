@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>玩家战局详情</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link href="./player.css" rel="stylesheet"/>
+</head>
+<body>
+    <div id="base" class="">
+
+      <!-- Unnamed (SVG) -->
+      <div id="u52" class="ax_default image">
+        <img id="u52_img" class="img " src="./image/back2.png"/>
+      </div>
+
+      <!-- Unnamed (Image) -->
+      <div id="u53" class="ax_default image">
+        <img id="u53_img" class="img " src="./image/back1.png"/>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u54" class="ax_default label">
+        <div id="u54_div" class=""></div>
+        <div id="u54_text" class="text ">
+          <p><span>玩家战局详情</span></p>
+        </div>
+      </div>
+
+      <div id="getId">
+          <input id="getId_playerID" type="text" value=""  placeholder ="请输入玩家ID"></input>
+          <input id="getId_limit" type="text" value=""  placeholder ="每页条数"></input>
+          <input id="getId_page" type="text" value=""  placeholder ="页码"></input>
+          <input id="getId_bt"  value="查询" type="submit" />
+      </div>
+
+      <!-- Unnamed (List Box) -->
+      <div id="u55" class="ax_default list_box">
+          <table class="fixed_header">
+            <thead>
+              <tr>
+                <th class="id">战局ID</th>
+                <th class="timestamp">该局结算时间</th>
+                <th class="card">玩家出牌情况</th>
+                <th class="score">分数变化情况</th>
+                
+              </tr>
+            </thead>
+            <tbody id="table">
+            </tbody>
+          </table>
+      </div>
+      
+      <!-- Unnamed (Menu) -->
+      <div id="u46" class="ax_default">
+          <!-- Unnamed (Table) -->
+  
+            <!-- Unnamed (Menu Item) -->
+            <div id="u48" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+              <div id="u48_text" class="text ">
+                <p><span>当前对战</span></p>
+              </div>
+            </div>
+  
+            <!-- Unnamed (Menu Item) -->
+            <div id="u49" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+              <div id="u49_text" class="text ">
+                <p><span>排行榜</span></p>
+              </div>
+            </div>
+  
+            <!-- Unnamed (Menu Item) -->
+            <div id="u50u" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+                <div id="u50u_text" class="text ">
+                  <p><span>往期对战</span></p>
+                </div>
+            </div>
+  
+  
+            <!-- Unnamed (Menu Item) -->
+            <div id="u50" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+              <div id="u50_text" class="text ">
+                <p><span>返回主菜单</span></p>
+              </div>
+            </div>
+  
+        </div>
+    </div>
+  </body>
+  <script>
+    function SignIn(IdName) { 
+      if(IdName == "u48")
+      {
+        window.location.href='current.html';
+      }
+      if(IdName == "u49")
+      {
+        window.location.href='sort.html';
+      }
+      if(IdName == "u50u")
+      {
+        window.location.href='result.html';
+      }
+      if(IdName == "u50")
+      {
+        window.location.href='menu.html';
+      }
+    }
+
+    var PlayerID=document.getElementById("getId_playerID").innerHTML;
+    var LIMIT=document.getElementById("getId_limit").innerHTML;
+    var PAGE=document.getElementById("getId_page").innerHTML;
+
+    document.getElementById("getId_bt").onclick=function(ID){
+      //删掉存在的数据
+      var tb = document.getElementById('table');
+      var rowNum=tb.rows.length;
+      for (var j=0;j<rowNum;j++)
+      {
+         tb.deleteRow(j);
+      }
+
+      var data = JSON.stringify({
+      "player_id": PlayerID,
+      "limit": LIMIT,
+      "page": PAGE,
+      });
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+        
+      xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === this.DONE) {
+      console.log(this.responseText);
+      var JsonObj = JSON.parse(this.responseText);
+      if(JsonObj.status==3002) alert("玩家不存在");
+      if(JsonObj.status==0){
+
+      var tab=document.getElementById("table");
+      for(var i = 0;i<JsonObj.data.length;i++)
+      {
+        var note=document.createElement("tr");
+        var note0=document.createElement("td");
+        note0.className="id";
+        note0.innerHTML=JsonObj.data[i].id;
+        var note1=document.createElement("td");
+        note1.className="timestamp";
+        note1.innerHTML=JsonObj.data[i].timestamp;
+        var note2=document.createElement("td");
+        note2.className="card";
+        note2.innerHTML=JsonObj.data[i].card;
+        var note3=document.createElement("td");
+        note3.className="score";
+        note3.innerHTML=JsonObj.data[i].score;
+        note.appendChild(note0);
+        note.appendChild(note1);
+        note.appendChild(note2);
+        note.appendChild(note3);
+        tab.appendChild(note);
+      }
+      }
+      }
+      }
+      );
+
+      xhr.open("GET", "http://shisanshui.rtxux.xyz/game/history");
+
+      xhr.send(data);
+    }
+  </script>
+</html>
