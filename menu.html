@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>主菜单</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link href="./menu.css" rel="stylesheet"/>
+</head>
+<body>
+    <div id="base" class="">
+
+      <!-- Unnamed (SVG) -->
+      <div id="u9" class="ax_default image">
+        <img id="u9_img" class="img " src="./image/back2.png"/>
+      </div>
+
+      <!-- Unnamed (Menu) -->
+      <div id="u10" class="ax_default">
+        <!-- Unnamed (Table) -->
+
+
+          <!-- Unnamed (Menu Item) -->
+          <div id="u12" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+            <div id="u12_text" class="text ">
+              <p><span>当前对战</span></p>
+            </div>
+          </div>
+
+          <!-- Unnamed (Menu Item) -->
+          <div id="u13" class="ax_defaultMenu_item" onclick="SignIn(this.id)"">
+            <div id="u13_text" class="text ">
+              <p><span>往期对战</span></p>
+            </div>
+          </div>
+
+          <!-- Unnamed (Menu Item) -->
+          <div id="u13u" class="ax_defaultMenu_item" onclick="SignIn(this.id)"">
+              <div id="u13u_text" class="text ">
+                <p><span>查询玩家</span></p>
+              </div>
+          </div>
+
+          <!-- Unnamed (Menu Item) -->
+          <div id="u14" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+            <div id="u14_text" class="text ">
+              <p><span>排行榜</span></p>
+            </div>
+          </div>
+
+          <!-- Unnamed (Menu Item) -->
+          <div id="u15" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+            <div id="u15_text" class="text ">
+              <p><span>退出登录</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </body>
+  <script>
+    function SignIn(IdName){
+      if(IdName == "u12")
+      {
+        window.location.href='current.html';
+      }
+      if(IdName == "u13")
+      {
+        window.location.href='result.html';
+        
+      }
+      if(IdName == "u13u")
+      {
+        window.location.href='player.html';
+      }
+      if(IdName == "u14")
+      {
+        window.location.href='sort.html';
+      }
+      if(IdName == "u15")
+      {
+        var data = null;
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+        window.location.href='enter.html';
+        }
+        });
+
+        xhr.open("POST", "http://shisanshui.rtxux.xyz/auth/logout");
+        xhr.setRequestHeader("X-Auth-Token", "{$$.env.X-Auth-Token}");
+
+        xhr.send(data);
+      
+      } 
+    }
+  </script>
+</html>
