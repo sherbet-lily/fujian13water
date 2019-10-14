@@ -67,7 +67,7 @@
           <thead>
             <tr>
               <th>玩家ID</th>
-              <th>玩家名</th>
+              <th id="player_id">玩家名</th>
               <th>分数</th>
             </tr>
           </thead>
@@ -77,39 +77,26 @@
       </div>
 
 
-    </div>
-  </body>
-  <script>
+    </div> 
+    
+    <script>
+
       window.onload=function ()
       {
         var data = null;
 
         var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
+        //xhr.withCredentials = true;
 
         xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
         console.log(this.responseText);
-        var JsonObj = JSON.parse(this.responseText);
-        var tab=document.getElementById("table");
-        for(var i = 0;i<JsonObj.length;i++)
-        {
-          var note=document.createElement("tr");
-          var note0=document.createElement("td");
-          note0.innerHTML=JsonObj[i].player_id;
-          var note1=document.createElement("td");
-          note1.innerHTML=JsonObj[i].name;
-          var note2=document.createElement("td");
-          note2.innerHTML=JsonObj[i].score;
-          note.appendChild(note0);
-          note.appendChild(note1);
-          note.appendChild(note2);
-          tab.appendChild(note);
-        }
+        var JsonObject = JSON.parse(this.responseText);
+        add(JsonObject);
         }
         });
 
-        xhr.open("GET", "http://shisanshui.rtxux.xyz/game/rank");
+        xhr.open("GET", "https://api.shisanshui.rtxux.xyz/rank");
 
         xhr.send(data);
       }
@@ -132,5 +119,27 @@
           window.location.href='menu.html';
         }
       }
+
+      function add(JsonObj)
+      {
+        var tab=document.getElementById("table");
+        for(var i = 0;i<JsonObj.length;i++)
+        {
+          var note=document.createElement("tr");
+          var note0=document.createElement("td");
+          note0.innerHTML=JsonObj[i].player_id;
+          var note1=document.createElement("td");
+          note1.innerHTML=JsonObj[i].name;
+          var note2=document.createElement("td");
+          note2.innerHTML=JsonObj[i].score;
+          note.appendChild(note0);
+          note.appendChild(note1);
+          note.appendChild(note2);
+          tab.appendChild(note);
+        }
+      }
+    
     </script>
+  </body>
+
 </html>
