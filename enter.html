@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>登录界面</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link href="./enter.css" rel="stylesheet"/>
+</head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (Image) -->
+      <div id="u0" class="ax_default image">
+        <img id="u0_img" class="img " src="./image/back1.png"/>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u1" class="ax_default box_1">
+        <div id="u1_div" class=""></div>
+      </div>
+
+      <!-- 账号 (Text Field) -->
+      <div id="u5" class="ax_default text_field" data-label="账号" >
+        <input id="u5_input" type="text" value="" placeholder="请输入账号"/>
+      </div>
+
+      <!-- 密码 (Text Field) -->
+      <div id="u6" class="ax_default text_field" data-label="密码" >
+        <input id="u6_input" type="password" value="" placeholder="请输入密码"/>
+      </div>
+
+      <!-- Unnamed (Rectangle) -->
+      <div id="u2" class="ax_default text_field" data-label="登录" >
+        <input id="u2_text"  value="登录" type="submit" />
+      </div>
+
+      <!-- Unnamed (Image) -->
+      <div id="u7" class="ax_default image">
+        <img id="u7_img" class="img " src="./image/group.png"/>
+      </div>
+
+      <!-- Unnamed (Image) -->
+      <div id="u8" class="ax_default image">
+        <img id="u8_img" class="img " src="./image/name.png"/>
+      </div>
+    </div>
+  </body>
+  <script>
+    document.getElementById("u2").onclick = function(){
+      var data = JSON.stringify({
+          "username": document.getElementById("u5_input").value,
+          "password": document.getElementById("u6_input").value
+      });
+
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+
+      xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === this.DONE) {
+      console.log(this.responseText);
+      window.location.href='menu.html';
+      }
+      });
+
+      xhr.open("POST", "http://shisanshui.rtxux.xyz/auth/login");
+      xhr.setRequestHeader("content-type", "application/json");
+
+      xhr.send(data);
+    }
+  </script>
+</html>
