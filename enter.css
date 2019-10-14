@@ -23,7 +23,7 @@ body {
 #u0 {
   border-width:0px;
   position:absolute;
-  left:-36px;
+  left:0px;
   top:0px;
   width:961px;
   height:541px;
@@ -58,7 +58,7 @@ body {
 #u1 {
   border-width:0px;
   position:absolute;
-  left:242px;
+  left:278px;
   top:191px;
   width:380px;
   height:263px;
@@ -77,7 +77,7 @@ body {
   position:absolute;
   left:0px;
   top:0px;
-  width:169px;
+  width:84px;
   height:25px;
   text-align: center;
   color:white;
@@ -88,10 +88,26 @@ body {
   color:black;
   cursor: pointer;
 }
+#u2u_text {
+  border-width:0px;
+  position:absolute;
+  left:85px;
+  top:0px;
+  width:84px;
+  height:25px;
+  text-align: center;
+  color:white;
+  background-color:rgba(0, 0, 0, 1);
+}
+#u2u_text:hover{
+  background-color: #f7c27e;
+  color:black;
+  cursor: pointer;
+}
 #u2{
   border-width:0px;
   position:absolute;
-  left:430px;
+  left:466px;
   top:385px;
   width:169px;
   height:25px;
@@ -101,7 +117,7 @@ body {
   border:black solid 1px;
   background-color: white;
   position:absolute;
-  left:430px;
+  left:466px;
   top:261px;
   width:169px;
   height:25px;
@@ -129,7 +145,7 @@ body {
   border:black solid 1px;
   background-color: white;
   position:absolute;
-  left:430px;
+  left:466px;
   top:323px;
   width:169px;
   height:25px;
@@ -165,7 +181,7 @@ body {
 #u7 {
   border-width:0px;
   position:absolute;
-  left:206px;
+  left:242px;
   top:182px;
   width:214px;
   height:242px;
@@ -190,7 +206,7 @@ body {
 #u8 {
   border-width:0px;
   position:absolute;
-  left:483px;
+  left:519px;
   top:104px;
   width:218px;
   height:168px;

@@ -32,8 +32,9 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u2" class="ax_default text_field" data-label="登录" >
+      <div id="u2" class="ax_default text_field" data-label="登录注册" >
         <input id="u2_text"  value="登录" type="submit" />
+        <input id="u2u_text"  value="注册" type="submit" />
       </div>
 
       <!-- Unnamed (Image) -->
@@ -46,28 +47,87 @@
         <img id="u8_img" class="img " src="./image/name.png"/>
       </div>
     </div>
-  </body>
+  
   <script>
-    document.getElementById("u2").onclick = function(){
+
+    var username=document.getElementById("u5_input");
+    var password=document.getElementById("u6_input");
+    document.getElementById("u2_text").onclick = function(){
       var data = JSON.stringify({
-          "username": document.getElementById("u5_input").value,
-          "password": document.getElementById("u6_input").value
+          "username": username.value,
+          "password": password.value
       });
 
       var xhr = new XMLHttpRequest();
-      xhr.withCredentials = true;
+      //xhr.withCredentials = true;
 
       xhr.addEventListener("readystatechange", function () {
       if (this.readyState === this.DONE) {
       console.log(this.responseText);
-      window.location.href='menu.html';
+      var JsonObj = JSON.parse(this.responseText);
+      if(JsonObj.status==0)
+      {
+        document.cookie = JsonObj.data.token;
+        valid();
+      }
       }
       });
 
-      xhr.open("POST", "http://shisanshui.rtxux.xyz/auth/login");
+      xhr.open("POST", "https://api.shisanshui.rtxux.xyz/auth/login");
       xhr.setRequestHeader("content-type", "application/json");
 
       xhr.send(data);
     }
+
+    document.getElementById("u2u_text").onclick = function(){
+      var data = JSON.stringify({
+        "username": username.value,
+        "password": password.value
+      });
+
+      var xhr = new XMLHttpRequest();
+      //xhr.withCredentials = true;
+      xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === this.DONE) {
+        console.log(this.responseText);
+        
+        var JsonObj = JSON.parse(this.responseText);
+        if(JsonObj.status==1001) alert("用户名已被使用");
+        if(JsonObj.status==1002) alert("学号已绑定");
+        if(JsonObj.status==0) alert("注册成功，请登录");
+        
+      }
+      });
+
+      xhr.open("POST", "https://api.shisanshui.rtxux.xyz/auth/register");
+      xhr.setRequestHeader("content-type", "application/json");
+      xhr.send(data);
+    }
+
+    function valid(){
+        var data = null;
+
+        var xhr = new XMLHttpRequest();
+        //xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+        console.log(this.responseText);
+        
+        var JsonObject = JSON.parse(this.responseText);
+        if(JsonObject.status==0) window.location.href='menu.html';
+        if(JsonObject.status==1003) alert("教务处认证失败");
+        if(JsonObject.status==1004) alert("Token过期");
+        
+        }
+        });
+
+        xhr.open("GET", "https://api.shisanshui.rtxux.xyz/auth/validate");
+        var token = document.cookie.split(";")[0];
+        xhr.setRequestHeader("x-auth-token",token);
+        xhr.send(data);
+    }
+
   </script>
+  </body>
 </html>
