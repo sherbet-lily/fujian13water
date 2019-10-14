@@ -91,9 +91,9 @@ body {
   #u45 {
     border-width:0px;
     position:absolute;
-    left:167.5px;
+    left:145.5px;
     top:223px;
-    width:625px;
+    width:675px;
     height:170px;
   }
 
@@ -215,7 +215,7 @@ body {
   }
 
   #fixed_header2{
-    width: 625px;
+    width: 675px;
     table-layout: fixed;
     border-collapse: collapse;
   }
@@ -246,7 +246,7 @@ body {
   }
   .card{
     text-align: center;
-    width:305px;
+    width:355px;
   }
   .score{
     text-align: center;
@@ -256,7 +256,7 @@ body {
   #fixed_header1{
     width: 440px;
     height:55px;
-    margin-left: 92.5px;
+    margin-left: 117.5px;
     table-layout: fixed;
     border-collapse: collapse;
   }

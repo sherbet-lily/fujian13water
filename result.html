@@ -99,8 +99,9 @@
       </div>
 
     </div>
-  </body>
+  
   <script>
+
     function SignIn(IdName){
       if(IdName == "u48")
       {
@@ -119,30 +120,36 @@
         window.location.href='menu.html';
       }
     }
-    var ID=document.getElementById("getId_text").innerHTML;
+    var ID=document.getElementById("getId_text");
 
-    document.getElementById("getId_bt").onclick=function(ID){
-      //删掉存在的数据
-      var tb = document.getElementById('table');
-      var rowNum=tb.rows.length;
-      for (var j=0;j<rowNum;j++)
-      {
-         tb.deleteRow(j);
-      }
-
-      var data = JSON.stringify({
-      "id": ID
-      });
-
+    document.getElementById("getId_bt").onclick=function(){
+      var data = null;
       var xhr = new XMLHttpRequest();
-      xhr.withCredentials = true;
+      //xhr.withCredentials = true;
         
       xhr.addEventListener("readystatechange", function () {
       if (this.readyState === this.DONE) {
       console.log(this.responseText);
-      var JsonObj = JSON.parse(this.responseText);
+      var JsonObject = JSON.parse(this.responseText);
+      add(JsonObject);}});
+      xhr.open("GET", "https://api.shisanshui.rtxux.xyz/history/"+ID.value);
+      var token = document.cookie.split(";")[0];
+      xhr.setRequestHeader("x-auth-token",token);
+      xhr.send(data);
+    }
+
+    function add(JsonObj)
+    {
+      //删掉存在的数据
+      var tb = document.getElementById('table');
+      var rowNum=tb.rows.length;
+      for (var j=rowNum-1;j>=0;j--)
+      {
+         tb.deleteRow(j);
+      }
+      if(JsonObj.status==1004) alert("Token过期");
       if(JsonObj.status==2003) alert("战局不存在或已结束");
-      if(JsonObj.status==3002) alert("战局不存在或未结束");
+      if(JsonObj.status==3001) alert("战局不存在或未结束");
       if(JsonObj.status==0){
       document.getElementById("id").innerHTML=JsonObj.data.id;
       document.getElementById("timestamp").innerHTML=JsonObj.data.timestamp;
@@ -168,14 +175,10 @@
         note.appendChild(note3);
         tab.appendChild(note);
       }
-      }
-      }
-      }
-      );
-
-      xhr.open("GET", "http://shisanshui.rtxux.xyz/game/history/%7Bid%7D");
-
-      xhr.send(data);
     }
+    }
+    
   </script>
+
+</body>
 </html>
