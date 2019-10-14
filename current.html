@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>当前对战状态</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link href="./current.css" rel="stylesheet"/>
+</head>
+<body>
+    <div id="base" class="">
+
+      <!-- Unnamed (SVG) -->
+      <div id="u16" class="ax_default image">
+        <img id="u16_img" class="img " src="./image/back2.png"/>
+      </div>
+
+      <!-- Unnamed (Group) -->
+      <div id="u19" class="ax_default" data-left="53" data-top="275" data-width="75" data-height="89">
+
+        <!-- Unnamed (Rectangle) -->
+        <div id="u20" class="ax_default box_2">
+          <div id="u20_div" class=""></div>
+        </div>
+
+        <!-- Unnamed (Horizontal Line) -->
+        <div id="u21" class="ax_default line">
+          <img id="u21_img" class="img " src="https://d1icd6shlvmxi6.cloudfront.net/gsc/2H9TOX/46/85/24/468524e7ad324dbea46000b470016841/images/显示当前对战状态/u21.png?token=28286d1104808c5f29d484f97e9c3a84668062d18b96aaf91377bdfed1abfd11"/>
+        </div>
+
+        <!-- Unnamed (Rectangle) -->
+        <div id="u22" class="ax_default label">
+          <div id="u22_div" class=""></div>
+          <div id="u22_text" class="text ">
+            <p><span>红凤凰</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (Rectangle) -->
+        <div id="u23" class="ax_default label">
+          <div id="u23_div" class=""></div>
+          <div id="u23_text" class="text ">
+            <p><span>+10</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (Menu) -->
+      <div id="u37" class="ax_default">
+        <!-- Unnamed (Table) -->
+          <!-- Unnamed (Menu Item) -->
+          <div id="u39" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+            <div id="u39_text" class="text ">
+              <p><span>往期对战</span></p>
+            </div>
+          </div>
+
+          <!-- Unnamed (Menu Item) -->
+          <div id="u39u" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+              <div id="u39u_text" class="text ">
+                <p><span>查询玩家</span></p>
+              </div>
+          </div>
+          
+          <!-- Unnamed (Menu Item) -->
+          <div id="u40" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+            <div id="u40_text" class="text ">
+              <p><span>排行榜</span></p>
+            </div>
+          </div>
+
+          <!-- Unnamed (Menu Item) -->
+          <div id="u41" class="ax_defaultMenu_item" onclick="SignIn(this.id)">
+            <div id="u41_text" class="text ">
+              <p><span>返回主菜单</span></p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </body>
+  <script>
+    function SignIn(IdName){
+      if(IdName == "u39")
+      {
+        window.location.href='result.html';
+      }
+      if(IdName == "u39u")
+      {
+        window.location.href='player.html';
+      }
+      if(IdName == "u40")
+      {
+        window.location.href='sort.html';
+      }
+      if(IdName == "u41")
+      {
+        window.location.href='menu.html';
+      }
+    }
+  </script>
+</html>
